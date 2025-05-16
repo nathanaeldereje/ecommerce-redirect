@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const txRef = urlParams.get('tx_ref');
-        if (txRef) {
-            window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
-        } else {
-            document.write("Missing tx_ref");
-        }
-    </script>
+    <meta http-equiv="refresh" content="0;url=ecommerceapp://payment-success?tx_ref=REPLACE_TX_REF">
 </head>
 <body>
-    Redirecting to the app...
+    Redirecting...
 </body>
 </html>

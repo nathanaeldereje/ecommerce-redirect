@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const txRef = urlParams.get('tx_ref');
+        if (txRef) {
+            window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
+        } else {
+            document.write("Missing tx_ref");
+        }
+    </script>
+</head>
+<body>
+    Redirecting to the app...
+</body>
+</html>

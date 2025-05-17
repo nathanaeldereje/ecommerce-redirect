@@ -6,44 +6,15 @@
       const urlParams = new URLSearchParams(window.location.search);
       const txRef = urlParams.get("tx_ref");
 
-      if (txRef) {
-        // Attempt to fetch the receipt URL
-        fetch(`https://api.chapa.co/v1/transaction/verify/${txRef}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': 'Bearer CHASECK_TEST-dlq2Uh0MNlnE9fF5VvJGxkOMfdQcHH1K'
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            const receiptUrl = data.data.receipt_url;
-            if (receiptUrl) {
-              // Redirect to your app with the receipt URL
-              window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}&receipt_url=${encodeURIComponent(receiptUrl)}`;
-            } else {
-              // Handle case where receipt URL is not available
-              setTimeout(() => {
-                window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
-              }, 4000); // Wait 4 seconds before redirecting
-            }
-          } else {
-            // Handle payment verification failure
-            alert("Payment verification failed.");
-          }
-        })
-        .catch(error => {
-          // Handle network or other errors
-          console.error("Error verifying payment:", error);
-          alert("An error occurred while verifying the payment.");
-        });
-      } else {
-        alert("Transaction reference is missing.");
-      }
+      setTimeout(() => {
+        if (txRef) {
+          window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
+        }
+      }, 4000); // Wait 4 seconds before redirecting
     </script>
   </head>
   <body>
-    <h1>Thank you for your payment!!</h1>
+    <h1>Thank you for your payment!</h1>
     <p>You will be redirected shortly...</p>
     <p><a id="openApp">Open App Now</a></p>
     <script>

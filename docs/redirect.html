@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="refresh" content="0;url=ecommerceapp://payment-success?tx_ref=REPLACE_TX_REF">
-</head>
-<body>
+  <head>
+    <title>Redirecting...</title>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const txRef = urlParams.get("tx_ref");
+
+      if (txRef) {
+        // Redirect to your app with tx_ref
+        window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
+      } else {
+        document.body.innerText = "Transaction reference missing.";
+      }
+    </script>
+  </head>
+  <body>
     Redirecting...
-</body>
+  </body>
 </html>

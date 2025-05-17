@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redirecting...</title>
+    <title>Payment Complete</title>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const txRef = urlParams.get("tx_ref");
-      const receiptUrl = urlParams.get("receipt");
 
-      // Show receipt link for user
-      if (receiptUrl) {
-        document.getElementById("receipt").href = receiptUrl;
-      }
-
-      // Redirect after a delay (or add a button)
       setTimeout(() => {
         if (txRef) {
           window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
         }
-      }, 7000);
+      }, 4000); // Wait 4 seconds before redirecting
     </script>
   </head>
   <body>
-    <h2>✅ Payment Complete!</h2>
-    <p>You're being redirected to the app.</p>
-
-    <a id="receipt" href="#" target="_blank">📄 View Receipt</a>
+    <h1>Thank you for your payment!</h1>
+    <p>You will be redirected shortly...</p>
+    <p><a id="openApp">Open App Now</a></p>
+    <script>
+      document.getElementById("openApp").href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
+    </script>
   </body>
 </html>

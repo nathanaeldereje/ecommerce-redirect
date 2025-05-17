@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Payment Complete</title>
+    <title>Redirecting...</title>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const txRef = urlParams.get("tx_ref");
+      const receiptUrl = urlParams.get("receipt");
 
-      // Set the deeplink for the app
-      const deeplink = `ecommerceapp://payment-success?tx_ref=${txRef}`;
+      // Show receipt link for user
+      if (receiptUrl) {
+        document.getElementById("receipt").href = receiptUrl;
+      }
 
-      // Wait a few seconds before redirecting
+      // Redirect after a delay (or add a button)
       setTimeout(() => {
         if (txRef) {
-          window.location.href = deeplink;
+          window.location.href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
         }
-      }, 7000); // Wait 7 seconds to give Chapa time to finalize receipt
+      }, 7000);
     </script>
   </head>
   <body>
-    <h1>✅ Thank you for your payment!</h1>
-    <p>We are processing your receipt. You will be redirected shortly.</p>
+    <h2>✅ Payment Complete!</h2>
+    <p>You're being redirected to the app.</p>
 
-    <p>
-      <strong>If you're not redirected:</strong><br>
-      <a id="openApp" href="#">Open the app manually</a>
-    </p>
-
-    <p>
-      <strong>Need a receipt?</strong><br>
-      <a id="receiptLink" href="#" target="_blank">View/Download Receipt</a>
-    </p>
-
-    <script>
-      // Set the open app link
-      document.getElementById("openApp").href = `ecommerceapp://payment-success?tx_ref=${txRef}`;
-
-      // Set a placeholder receipt link — this depends on your API or portal
-      // If Chapa provides a predictable receipt URL structure, you can try:
-      document.getElementById("receiptLink").href = `https://dashboard.chapa.co/receipt/${txRef}`;
-      // Or keep it empty if unavailable
-    </script>
+    <a id="receipt" href="#" target="_blank">📄 View Receipt</a>
   </body>
 </html>
